@@ -4,11 +4,13 @@
 package API.rest.assured;
 
 
-
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
+
 import static io.restassured.RestAssured.when;
 
 public class AppTest {
@@ -16,14 +18,23 @@ public class AppTest {
 
     @Test
     public void testeListaMetadosUsuarios() {
-
-                when()
-                        .get("https://reqres.in/api/users?page=2").
+        when()
+                .get("https://reqres.in/api/users?page=2").
                 then().
-                        statusCode(HttpStatus.SC_OK).
-                        body("page", is(2)).
-                        body("data", is(notNullValue()));
+                statusCode(HttpStatus.SC_OK).
+                body("page", is(2)).
+                body("data", is(notNullValue()));
+    }
 
-
+    @Test
+    public void criaUsuarioComSucesso() {
+        given().log().all().
+                contentType(ContentType.JSON).
+                body("{\"name\": \"Mateus\",\"job\": \"Eng. Teste\"}").
+                when().
+                post("https://reqres.in/api/users").
+                then()
+                .statusCode(201)
+                .body("name", is("Mateus"));
     }
 }
