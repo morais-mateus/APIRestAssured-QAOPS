@@ -7,13 +7,21 @@ package API.rest.assured;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.when;
 
 public class AppTest {
+
+    @BeforeClass
+    public static void setup(){
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
 
 
     @Test
@@ -28,7 +36,7 @@ public class AppTest {
 
     @Test
     public void criaUsuarioComSucesso() {
-        given().log().all().
+        given().
                 contentType(ContentType.JSON).
                 body("{\"name\": \"Mateus\",\"job\": \"Eng. Teste\"}").
                 when().
