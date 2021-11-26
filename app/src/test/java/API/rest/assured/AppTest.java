@@ -3,12 +3,27 @@
  */
 package API.rest.assured;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+
+import static org.hamcrest.Matchers.*;
+
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Test;
+import static io.restassured.RestAssured.when;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+
+
+    @Test
+    public void testeListaMetadosUsuarios() {
+
+                when()
+                        .get("https://reqres.in/api/users?page=2").
+                then().
+                        statusCode(HttpStatus.SC_OK).
+                        body("page", is(2)).
+                        body("data", is(notNullValue()));
+
+
     }
 }
