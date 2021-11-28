@@ -19,7 +19,6 @@ public class RegistroTeste  extends  BaseTeste{
 
 
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .body(user)
                 .when().post("/register")
                 .then().statusCode(HttpStatus.SC_BAD_REQUEST)

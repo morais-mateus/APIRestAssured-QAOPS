@@ -32,7 +32,6 @@ public class UsuarioTeste extends BaseTeste{
         Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com");
 
         RestAssured.given().
-                contentType(ContentType.JSON).
                 body(usuario).
                 when().
                 post("/users").
