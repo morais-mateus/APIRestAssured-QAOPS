@@ -2,12 +2,11 @@ package API.rest.assured.test;
 
 import API.rest.assured.dominio.Usuario;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
-public class RegistroTeste  extends  BaseTeste{
+public class TesteRegistro extends TesteBase {
 
     private static  final String REGISTRA_USUARIO_ENDPOINT = "/register";
 

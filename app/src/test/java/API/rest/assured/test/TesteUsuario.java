@@ -6,21 +6,20 @@ package API.rest.assured.test;
 
 import API.rest.assured.dominio.Usuario;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class UsuarioTeste extends BaseTeste{
+public class TesteUsuario extends TesteBase {
 
     private static final String LISTA_USUARIOS_ENDPOINT ="/users";
     private static final String CRIAR_USUARIO_ENDDPOINT = "/user";
 
 
     @Test
-    public void testeListaMetadosUsuarios() {
+    public void testMortaPaginaEspecifica() {
         RestAssured.given().param("page","2").
         when()
                 .get(LISTA_USUARIOS_ENDPOINT).
@@ -31,7 +30,7 @@ public class UsuarioTeste extends BaseTeste{
     }
 
     @Test
-    public void criaUsuarioComSucesso() {
+    public void testeCriaUsuarioComSucesso() {
         Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com");
 
         RestAssured.given().
