@@ -2,8 +2,10 @@ package API.rest.assured.test;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
 
 import static io.restassured.RestAssured.basePath;
@@ -16,6 +18,10 @@ public class TesteBase {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         baseURI = "https://reqres.in";
         basePath = "/api";
+
         RestAssured.requestSpecification = new RequestSpecBuilder().setContentType(ContentType.JSON).build();
+
+        RestAssured.responseSpecification = new ResponseSpecBuilder().expectContentType(ContentType.JSON)
+                .build();
     }
 }
