@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class RegistroTeste  extends  BaseTeste{
 
-
+    private static  final String REGISTRA_USUARIO_ENDPOINT = "/register";
 
     @Test
     public void testNaoEfetuaRegistroQuandoSenhaEstaFaltando() {
@@ -20,7 +20,7 @@ public class RegistroTeste  extends  BaseTeste{
 
         RestAssured.given()
                 .body(user)
-                .when().post("/register")
+                .when().post(REGISTRA_USUARIO_ENDPOINT)
                 .then().statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body("error", Matchers.is("Missing password"));
     }

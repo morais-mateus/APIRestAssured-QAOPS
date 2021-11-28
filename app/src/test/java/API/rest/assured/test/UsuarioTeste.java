@@ -15,12 +15,15 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class UsuarioTeste extends BaseTeste{
 
+    private static final String LISTA_USUARIOS_ENDPOINT ="/users";
+    private static final String CRIAR_USUARIO_ENDDPOINT = "/user";
+
 
     @Test
     public void testeListaMetadosUsuarios() {
         RestAssured.given().param("page","2").
         when()
-                .get("/users").
+                .get(LISTA_USUARIOS_ENDPOINT).
                 then().
                 statusCode(HttpStatus.SC_OK).
                 body("page", is(2)).
@@ -34,7 +37,7 @@ public class UsuarioTeste extends BaseTeste{
         RestAssured.given().
                 body(usuario).
                 when().
-                post("/users").
+                post(CRIAR_USUARIO_ENDDPOINT).
                 then()
                 .statusCode(201)
                 .body("name", is("Mateus"));
