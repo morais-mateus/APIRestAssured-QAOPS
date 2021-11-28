@@ -4,8 +4,7 @@
 package API.rest.assured.test;
 
 
-import static io.restassured.RestAssured.basePath;
-import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import API.rest.assured.dominio.Usuario;
@@ -41,7 +40,7 @@ public class UsuarioTeste {
 
     @Test
     public void criaUsuarioComSucesso() {
-        Usuario usuario = new Usuario("Mateus","Analista de Sistema");
+        Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com");
 
         RestAssured.given().
                 contentType(ContentType.JSON).
@@ -53,12 +52,10 @@ public class UsuarioTeste {
                 .body("name", is("Mateus"));
     }
 
-    @Test
-    public void teste() {
 
 
 
-    }
+
 
 
 
