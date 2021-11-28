@@ -7,6 +7,7 @@ package API.rest.assured.test;
 import API.rest.assured.dominio.Usuario;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -19,7 +20,7 @@ public class TesteUsuario extends TesteBase {
 
 
     @Test
-    public void testMortaPaginaEspecifica() {
+    public void testMostraPaginaEspecifica() {
         RestAssured.given().param("page","2").
         when()
                 .get(LISTA_USUARIOS_ENDPOINT).
@@ -42,11 +43,20 @@ public class TesteUsuario extends TesteBase {
                 .body("name", is("Mateus"));
     }
 
+    @Test
+    public void testeTamanhoDosItemsMostradosIgualAoPerPage() {
+        RestAssured.given().param("page", "2").
+                when()
+                .get(LISTA_USUARIOS_ENDPOINT).
+                then().
+                statusCode(HttpStatus.SC_OK).
+                body(
+                        "page", is(2),
+                        "data.size()", Matchers.is(6),
+                        "data.findAll {it.avatar.startsWith('https://reqres.in')}.size()", is(6)
 
+                );
 
-
-
-
-
+    }
 
 }
