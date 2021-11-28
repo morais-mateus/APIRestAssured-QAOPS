@@ -35,6 +35,7 @@ public class TesteRegistro extends TesteBase {
                 .body("error", Matchers.is("Missing password"));
     }
 
+    //Esse teste deveria estar no TesteLogin
     @Test
     public void testLoginNaoEfetuadoQuandoSenhaEstaFaltando() {
 

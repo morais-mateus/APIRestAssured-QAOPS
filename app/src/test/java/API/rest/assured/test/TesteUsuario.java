@@ -7,16 +7,17 @@ package API.rest.assured.test;
 import API.rest.assured.dominio.Usuario;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class TesteUsuario extends TesteBase {
 
     private static final String LISTA_USUARIOS_ENDPOINT ="/users";
     private static final String CRIAR_USUARIO_ENDDPOINT = "/user";
+    private static final String MOSTRAR_USUARIO_ENDDPOINT = "/users/{userID}";
 
 
     @Test
@@ -62,6 +63,24 @@ public class TesteUsuario extends TesteBase {
 
     }
 
+    @Test
+    public void testeMotraUsuarioEspecifico(){
+
+      Usuario usuario =  RestAssured.given()
+                .pathParam("userID",2)
+                .when()
+                .get(MOSTRAR_USUARIO_ENDDPOINT)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+              .extract().body().jsonPath().getObject("data",Usuario.class);
+            //    .body("data.email", containsString("@reqres.in"));
+
+        MatcherAssert.assertThat(usuario.getEmail(), containsString("@reqres.in"));
+        MatcherAssert.assertThat(usuario.getName(), is("Janet"));
+        MatcherAssert.assertThat(usuario.getLastname(), is("Weaver"));
+    }
+
+
 
     private int retornaPerPageEsperado(int page) {
         int perPageEsperado = RestAssured.given().param("page",page).
@@ -70,5 +89,7 @@ public class TesteUsuario extends TesteBase {
                 .statusCode(HttpStatus.SC_OK).extract().path("per_page");
         return perPageEsperado;
     }
+
+
 
 }
