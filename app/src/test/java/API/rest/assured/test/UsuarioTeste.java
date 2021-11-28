@@ -7,11 +7,15 @@ package API.rest.assured.test;
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.baseURI;
 import static org.hamcrest.Matchers.*;
+
+import API.rest.assured.dominio.Usuario;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 
 
+import org.apache.http.util.Asserts;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -37,14 +41,23 @@ public class UsuarioTeste {
 
     @Test
     public void criaUsuarioComSucesso() {
+        Usuario usuario = new Usuario("Mateus","Analista de Sistema");
+
         RestAssured.given().
                 contentType(ContentType.JSON).
-                body("{\"name\": \"Mateus\",\"job\": \"Eng. Teste\"}").
+                body(usuario).
                 when().
                 post("/users").
                 then()
                 .statusCode(201)
                 .body("name", is("Mateus"));
+    }
+
+    @Test
+    public void teste() {
+
+
+
     }
 
 
