@@ -4,28 +4,17 @@
 package API.rest.assured.test;
 
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-
 import API.rest.assured.dominio.Usuario;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
-
-
-import org.apache.http.util.Asserts;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class UsuarioTeste {
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
-    @BeforeAll
-        public static void setup(){
-           RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-           baseURI = "https://reqres.in";
-           basePath ="/api";
-        }
+public class UsuarioTeste extends BaseTeste{
+
 
     @Test
     public void testeListaMetadosUsuarios() {

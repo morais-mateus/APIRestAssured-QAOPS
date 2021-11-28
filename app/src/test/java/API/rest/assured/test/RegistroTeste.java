@@ -5,20 +5,11 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.basePath;
-import static io.restassured.RestAssured.baseURI;
+public class RegistroTeste  extends  BaseTeste{
 
-public class RegistroTeste {
 
-    @BeforeAll
-    public static void setup() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        baseURI = "https://reqres.in";
-        basePath = "/api";
-    }
 
     @Test
     public void testNaoEfetuaRegistroQuandoSenhaEstaFaltando() {
