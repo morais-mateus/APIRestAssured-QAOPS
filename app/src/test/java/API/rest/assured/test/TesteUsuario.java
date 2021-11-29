@@ -11,6 +11,9 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.hamcrest.Matchers.*;
 
 public class TesteUsuario extends TesteBase {
@@ -33,7 +36,10 @@ public class TesteUsuario extends TesteBase {
 
     @Test
     public void testeCriaUsuarioComSucesso() {
-        Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com","lima");
+       // Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com","lima");
+        Map<String, String> usuario = new HashMap<>();
+        usuario.put("name", "Mateus");
+        usuario.put("job", " Eng Testes");
 
         RestAssured.given().
                 body(usuario).
