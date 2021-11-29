@@ -33,7 +33,7 @@ public class TesteUsuario extends TesteBase {
 
     @Test
     public void testeCriaUsuarioComSucesso() {
-        Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com");
+        Usuario usuario = new Usuario("Mateus","Analista de Sistema","mateusmorrais@gmail.com","lima");
 
         RestAssured.given().
                 body(usuario).
